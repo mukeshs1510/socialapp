@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "368791878124",
+    "firebase_url": "https://social-rn-e93b3.firebaseio.com",
+    "project_id": "social-rn-e93b3",
+    "storage_bucket": "social-rn-e93b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368791878124:android:b2db58566e2bf295a028c9",
+        "android_client_info": {
+          "package_name": "com.social_try"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368791878124-8gan886kisjjbmo7uutp1fugkg0lujud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOVyeZt0tAPUKkezHXGG70PnFy6Tw7KtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368791878124-8gan886kisjjbmo7uutp1fugkg0lujud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
