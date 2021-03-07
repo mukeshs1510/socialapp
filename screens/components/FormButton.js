@@ -4,7 +4,10 @@ import {windowHeight, windowWidth} from '../utilities/Dimentions';
 
 const FormButton = ({buttonTitle, ...rest}) => {
   return (
-    <TouchableOpacity style={styles.buttonContainer} {...rest}>
+    <TouchableOpacity
+      activeOpacity={0.3}
+      style={styles.buttonContainer}
+      {...rest}>
       <Text style={styles.buttonText}>{buttonTitle}</Text>
     </TouchableOpacity>
   );

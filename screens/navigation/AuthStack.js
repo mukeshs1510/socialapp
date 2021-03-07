@@ -1,16 +1,13 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {
   createStackNavigator,
-  HeaderTitle,
-  TransitionPresets,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {View, Text, Button} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/dist/FontAwesome';
-import LoginPage from '../screens/LoginPage';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import SignupPage from '../screens/SignupPage';
+import LoginPage from '../pages/LoginPage';
+import OnboardingScreen from '../pages/OnboardingScreen';
+import SignupPage from '../pages/SignupPage';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +23,11 @@ const AuthStack = () => {
       } else {
         setIsFIrstLaunch(false);
       }
+    });
+
+    GoogleSignin.configure({
+      webClientId:
+        '368791878124-8gan886kisjjbmo7uutp1fugkg0lujud.apps.googleusercontent.com',
     });
   }, []);
 
@@ -59,28 +61,30 @@ const AuthStack = () => {
       <Stack.Screen
         name="Signup"
         component={SignupPage}
-        options={({navigation}) => ({
-          title: '',
-          headerStyle: {
-            backgroundColor: '#f9fafd',
-            shadowColor: '#f9fafd',
-            elevation: 0,
-          },
-          headerLeft: () => (
-            <View style={{marginLeft: 10}}>
-              <FontAwesome.Button
-                name="long-arrow-left"
-                size={25}
-                backgroundColor="#f9fafd"
-                color="#333"
-                onPress={() => navigation.navigate('Login')}
-              />
-            </View>
-          ),
-        })}
+        options={{header: () => null}}
       />
     </Stack.Navigator>
   );
 };
 
 export default AuthStack;
+
+// options={({navigation}) => ({
+//   title: '',
+//   headerStyle: {
+//     backgroundColor: '#f9fafd',
+//     shadowColor: '#f9fafd',
+//     elevation: 0,
+//   },
+//   headerLeft: () => (
+//     <View style={{marginLeft: 10}}>
+//       <FontAwesome.Button
+//         name="long-arrow-left"
+//         size={25}
+//         backgroundColor="#f9fafd"
+//         color="#333"
+//         onPress={() => navigation.navigate('Login')}
+//       />
+//     </View>
+//   ),
+// })}

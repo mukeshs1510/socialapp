@@ -1,23 +1,35 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import FormInput from '../components/FormInput';
 import {AuthContext} from '../navigation/AuthProvider';
 import {ScrollView} from 'react-native-gesture-handler';
+import Snackbar from 'react-native-snackbar';
 
 const SignupPage = ({navigation}) => {
   const [email, setEmail] = useState();
   const [passwrd, setPasswrd] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const {register} = useContext(AuthContext);
+  const {register, googleSignIn, facebookSignIn} = useContext(AuthContext);
+
+  const _handleSignup = () => {
+    if (!email && !passwrd && !confirmPassword) {
+      Snackbar.show({
+        text: 'Please enter your email and password to register',
+      });
+    } else {
+      register(email, passwrd);
+    }
+  };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View style={styles.container}>
         <Text style={styles.text}>Create an account</Text>
+
         <FormInput
           lableValue={email}
           onChangeText={(userEmail) => setEmail(userEmail)}
@@ -27,6 +39,7 @@ const SignupPage = ({navigation}) => {
           autoCapitalize="none"
           autoCorrect={false}
         />
+
         <FormInput
           lableValue={passwrd}
           onChangeText={(userPassword) => setPasswrd(userPassword)}
@@ -45,10 +58,7 @@ const SignupPage = ({navigation}) => {
           secureTextEntry={true}
         />
 
-        <FormButton
-          buttonTitle="Sign up"
-          onPress={() => register(email, passwrd)}
-        />
+        <FormButton buttonTitle="Sign up" onPress={() => _handleSignup()} />
 
         <View style={styles.textPrivate}>
           <Text style={styles.color_textPrivate}>
@@ -67,20 +77,24 @@ const SignupPage = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <SocialButton
-          buttonTitle="Sign up with Facebook"
-          btnType="facebook"
-          color="#4867aa"
-          backgroundColor="#e6eaf4"
-          onPress={() => {}}
-        />
-        <SocialButton
-          buttonTitle="Sign up with Google"
-          btnType="google"
-          color="#de4d41"
-          backgroundColor="#f5e7ea"
-          onPress={() => {}}
-        />
+        {Platform.OS === 'android' ? (
+          <View>
+            <SocialButton
+              buttonTitle="Sign up with Facebook"
+              btnType="facebook"
+              color="#4867aa"
+              backgroundColor="#e6eaf4"
+              onPress={() => facebookSignIn()}
+            />
+            <SocialButton
+              buttonTitle="Sign up with Google"
+              btnType="google"
+              color="#de4d41"
+              backgroundColor="#f5e7ea"
+              onPress={() => googleSignIn()}
+            />
+          </View>
+        ) : null}
 
         <TouchableOpacity
           style={styles.navButton}
